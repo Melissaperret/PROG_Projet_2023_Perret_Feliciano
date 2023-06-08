@@ -1,0 +1,8 @@
+Compteur utilisation de fonction binaire : 01
+Compteur utilisation de fonction trigonométrique : 02
+09.06.2023 - 00:49
+23.00 / 0b 00001011
+09.06.2023 - 00:49
+10, 15 / 10, 15, 18, 0.83, 0.55, 1.5, 0.98
+09.06.2023 - 00:49
+10, 15 / 10, 15, 18, 0.83, 0.55, 1.5, 56
