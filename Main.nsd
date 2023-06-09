@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.30-10" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" author="melperret" created="2023-06-09" changedby="melperret" changed="2023-06-09" origin="Structorizer 3.30-10" text="&#34;Main&#34;" comment="&#34;&#34;" color="ffffff" type="program" style="nice">
+	<children>
+		<call text="&#34;Ouvrerture du fichier &#34;&#34;TempLogs.txt&#34;&#34; en mode lecture et écriture, puis assignation du pointeur au fichier file&#34;,&#34;.&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+		<alternative text="&#34;SI(l'ouverture du fichier est un échec)&#34;" comment="&#34;&#34;" color="ffff80" disabled="0">
+			<qTrue>
+				<call text="&#34;Affiche un message d'erreur&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+			</qTrue>
+			<qFalse color="ffffff">
+			</qFalse>
+		</alternative>
+		<instruction text="&#34;Déclaration des variables locales &#34;,&#34;énum : valeurTriangle valeurs, uniteAngle unite, choixDuMode choixModes&#34;,&#34;entier : compteurConversionBinaire, compteurTrigonometrie&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+		<while text="&#34;TANTQUE(1)&#34;" comment="&#34;&#34;" color="ffff80" disabled="0">
+			<qWhile>
+				<call text="&#34;Affiche le message &#34;&#34; Veuillez choisir votre mode :&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<call text="&#34;Affiche le message &#34;&#34; 0. Conversion binaire&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<call text="&#34;Affiche le message &#34;&#34;1. Trigonometrie&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<call text="&#34;Affiche le message &#34;&#34; 2. Quitter&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<call text="&#34;Affiche le message &#34;&#34; Entrez le numero de votre choix :&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<call text="&#34;Demande à l'utilisateur de choisir un des modes&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+				<case text="&#34;SELON(choixModes)&#34;,&#34;CONVERSION&#34;,&#34;TRIGONOMETRIE&#34;,&#34;QUITTER&#34;,&#34;default&#34;" comment="&#34;&#34;" color="ffff80" disabled="0">
+					<qCase>
+						<call text="&#34;Appel de la fonction ConversionBinaire &#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+						<instruction text="&#34;Incrémente compteurConversionBinaire&#34;" comment="&#34;&#34;" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<call text="&#34;Appel de la fonction CalculTriangleRectangle &#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+						<instruction text="&#34;Incrémente compteurTrigonometrie&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+					</qCase>
+					<qCase>
+						<call text="&#34;Appel de la fonction EcritureLogs &#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+						<call text="&#34;Fermeture du fichier temporaire&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+						<call text="&#34;Efface le fichier temporaire&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+						<call text="&#34;Appel de la fonction exit et permet de quitter le programme&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+					</qCase>
+					<qCase>
+						<call text="&#34;Affiche le message &#34;&#34; ERREUR, veuillez choisir entre 0, 1 et 2:&#34;&#34;&#34;" comment="&#34;&#34;" color="ffffff" disabled="0"></call>
+					</qCase>
+				</case>
+			</qWhile>
+		</while>
+	</children>
+</root>
