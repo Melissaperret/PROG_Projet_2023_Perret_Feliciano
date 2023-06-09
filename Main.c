@@ -1,26 +1,20 @@
 // Canevas Projet_Prog 
 // Auteur :  M.Perret et C.Feliciano
 
-// Suppression avertissement C4996
-#define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h> // pour fopen, fprintf
-#include <stdlib.h>
+#include <stdio.h>	 // pour fopen, fprintf
+#include <stdlib.h>  //pour exit(0)
 #include <time.h>
 #include "fonctions.h"
 
-// ouvre le fichier au début du main, passe le pointeur à fonctions de calcul, 
-
 int main()
 {
-
-	FILE* file = fopen("TempLogs.txt", "w+");
+	FILE* file = fopen("TempLogs.txt", "w+");		//Crée le fichier + Ouverture, le w+ permet la lecture et l'écriture 
 	if (file == NULL)
 	{
 		printf("Erreur lors de l'ouverture ou de la création du fichier de logs.\n");
 		return;
 	}
-
 
 	valeurTriangle valeurs;
 	uniteAngle unite = 0;
@@ -36,27 +30,27 @@ int main()
 		printf("2. Quitter\n");
 		printf("Entrez le numero de votre choix : ");
 
-		scanf("%d", &choixModes);
+		scanf_s("%d", &choixModes);
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		switch (choixModes)
 		{
 		case CONVERSION:
 			ConversionBinaire(file);
-			compteurConversionBinaire++;
+			compteurConversionBinaire++; // Incrémente le compteur de conversions binaires
 			break;
 		case TRIGONOMETRIE:
 			printf("\n");
 			CalculTriangleRectangle(file, &valeurs, unite);
-			compteurTrigonometrie++;
+			compteurTrigonometrie++;     // Incrémente le compteur de la fonction trigonométrique
 			break;
 		case QUITTER:
-			Ecriturelogs(file, compteurConversionBinaire, compteurTrigonometrie);
+			EcritureLogs(file, compteurConversionBinaire, compteurTrigonometrie);  // Appelle la fonction Ecriturelogs pour enregistrer les compteurs dans le fichier
 			fclose(file);
-			remove("TempLogs.txt");
-			exit(0);		//permet de quitter le programme 
+			remove("TempLogs.txt");			//On supprime le fichier TempLogs
+			exit(0);						//permet de quitter le programme 
 		default:
-			printf("ERREUR, veuillez choisir entre 0 et 1:\n\n");
+			printf("ERREUR, veuillez choisir entre 0, 1 et 2:\n\n");
 		}
 	}
 	return 0;

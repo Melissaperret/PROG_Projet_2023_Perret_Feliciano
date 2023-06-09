@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 #include "fonctions.h"
 
 // Fonction pour convertir une valeur réelle en binaire
@@ -9,8 +8,8 @@ void ConversionBinaire(FILE* file)
 	choixModeDigits modes;
 	int nbDigits, valEntiere, i, tbResteModulo[10], bit;
 
-	printf("Entrez une valeur  : ");
-	scanf("%f", &valUtilisateur);
+	printf("Entrez une valeur : ");
+	scanf_s("%f", &valUtilisateur);
 
 
 	printf("Selectionnez le mode d'affichage :\n");
@@ -19,12 +18,12 @@ void ConversionBinaire(FILE* file)
 	printf("2. Mode 16 digits\n");
 	printf("3. Mode 32 digits\n");
 	printf("Selectionnez le mode :");
-	scanf("%d", &modes);
+	scanf_s("%d", &modes);
 
 	EcrireDateHeure(file);			//pour écrire l'heure exacte après que l'utilisateur ait rentré ses valeurs 
 	fprintf(file, "%.2g / ", valUtilisateur);
 
-	valEntiere = valUtilisateur;		// Partie entière de la valeur
+	valEntiere = (int)valUtilisateur;		// Partie entière de la valeur
 	float valFractionnaire = valUtilisateur - valEntiere; // Partie décimale de la valeur
 
 	switch (modes)
@@ -43,7 +42,8 @@ void ConversionBinaire(FILE* file)
 		break;
 	default:
 		printf("Mode invalide. \n ");
-		return 1;
+		nbDigits = 1;
+		break;
 	}
 	printf("\n");
 
@@ -51,18 +51,27 @@ void ConversionBinaire(FILE* file)
 	// Dans les modes 8, 16, 32, les valeurs flottantes sont arrondis vers le bas 
 	if (nbDigits != 0)
 	{
-		printf("Partie entiere : 0b ");
-		fprintf(file, "0b");
-		for (i = nbDigits - 1; i >= 0; i--) // boucle en décrémentation pour aller du msb au lsb et donc afficher les bits via le printf dans le bon ordre
+		if (nbDigits > 1)
 		{
-			// 10111 >> 1 = 01011
-			//		01011 
-			//	  &	00001
-			//		00001		
-
-			bit = (valEntiere >> i) & 1; // on utilise un décalage vers la droite de i bits, ainsi qu'un masque, pour récupérer la valeur du i ème bit (0 ou 1), 
-			printf("%d", bit);
-			fprintf(file, "%d", bit);
+			if (valEntiere == valUtilisateur)
+			{
+				printf("Partie binaire : 0b ");
+				fprintf(file, "0b");
+				for (i = nbDigits - 1; i >= 0; i--) // boucle en décrémentation pour aller du msb au lsb et donc afficher les bits via le printf dans le bon ordre
+				{
+					// 10111 >> 1 = 01011
+					//        01011 
+					//      & 00001
+					//        00001        
+					bit = (valEntiere >> i) & 1;	// on utilise un décalage vers la droite de i bits, ainsi qu'un masque, pour récupérer la valeur du i ème bit (0 ou 1), 
+					printf("%d", bit);
+					fprintf(file, "%d", bit);
+				}
+			}
+			else
+			{
+				printf("Impossible de convertir une valeur flottante dans ce mode");
+			}
 		}
 	}
 	else
@@ -82,7 +91,7 @@ void ConversionBinaire(FILE* file)
 			// 0 => on s'arrête
 			// Donc 23 en binnaire ça donne 10111 (les restes en remontant)
 
-			printf("Partie entiere : 0b ");
+			printf("Partie binaire : 0b ");
 			fprintf(file, "0b");
 			for (i = 0; valEntiere > 0; i++)
 			{
@@ -102,15 +111,16 @@ void ConversionBinaire(FILE* file)
 			if (valFractionnaire != 0.0) // Note: valFractionnaire est comprise entre ]-1, +1[
 			{
 				printf(".");
+				fprintf(file, ".");
 				for (i = 0; i < 3; i++) // "se limiter à 3 digits après le 0" (énoncé)
 				{
-					valFractionnaire *= 2;
-					bit = (int)valFractionnaire;
-					valFractionnaire -= bit;
-					bit = bit & 1; // Assure que le bit est soit 0 ou 1
+					valFractionnaire *= 2;			// Multiplie la partie fractionnaire par 2
+					bit = (int)valFractionnaire;	// Convertit la partie entière de valFractionnaire en un bit
+					valFractionnaire -= bit;		// Soustrait la partie entière de valFractionnaire pour obtenir la nouvelle partie fractionnaire
+					bit = bit & 1;					// Assure que le bit est soit 0 ou 1
 
-					printf("%d", bit);
-					fprintf(file, "%d", bit);
+					printf("%d", bit);				// Affiche le bit sur la console
+					fprintf(file, "%d", bit);		// Écrit le bit dans le fichier
 				}
 			}
 		}

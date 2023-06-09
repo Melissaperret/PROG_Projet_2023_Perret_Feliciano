@@ -1,6 +1,4 @@
 #include <stdio.h>	// pour fopen, fprintf
-//#include <stdlib.h>
-
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "fonctions.h"
@@ -14,13 +12,13 @@ void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unit
 	printf("0. Degree\n");
 	printf("1. Radian\n");
 	printf("Entrez le numero de l'unite: ");
-	scanf("%d", &unite);
+	scanf_s("%d", &unite);							//la variable unite est utilisé pour choisir si on souhaite en degré ou radian l'angle alpha
 	while ((getchar() != '\n') && (getchar() != EOF));
 
 	while (unite < 0 || unite > 1)
 	{
 		printf("Veuillez rentrer une nouvelle valeur entre 0 ou 1 : ");
-		scanf("%d", &unite);
+		scanf_s("%d", &unite);
 		while ((getchar() != '\n') && (getchar() != EOF));
 	}
 
@@ -31,89 +29,89 @@ void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unit
 	printf("1. Abcisse \n");
 	printf("2. Oppose \n");
 	printf("Entrez le numero de votre choix selon le calcul souhaite : ");
-	scanf("%d", &choix);
+	scanf_s("%d", &choix);
 	while ((getchar() != '\n') && (getchar() != EOF));
 
 	switch (choix)
 	{
 	case HYPOTHENUSE:
-		printf("Entrez la valeur de l'abscisse: ");
-		scanf("%lf", &(valeur->abscisse));
+		printf("Entrez la valeur de l'abscisse : ");
+		scanf_s("%lf", &(valeur->abscisse));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->abscisse <= 0)
 		{
-			printf("Veuillez rentrer une nouvelle valeur pour l'abscisse ");
-			scanf("%lf", &(valeur->abscisse));
+			printf("Veuillez rentrer une nouvelle valeur pour l'abscisse : ");
+			scanf_s("%lf", &(valeur->abscisse));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
-		printf("Entrez la valeur du cote oppose: ");
-		scanf("%lf", &(valeur->coteOppose));
+		printf("Entrez la valeur du cote oppose : ");
+		scanf_s("%lf", &(valeur->coteOppose));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->coteOppose <= 0)
 		{
 			printf("Veuillez rentrer une nouvelle valeur pour le cote oppose : ");
-			scanf("%lf", &(valeur->coteOppose));
+			scanf_s("%lf", &(valeur->coteOppose));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
-		valeur->hypotenuse = sqrt(pow(valeur->abscisse, 2) + pow(valeur->coteOppose, 2));  //le 2 est pour la puissance au carré 
+		valeur->hypotenuse = sqrt(pow(valeur->abscisse, 2) + pow(valeur->coteOppose, 2));  //Calcul pour trouver le côté opposé en utilisant le théorème de pythagore (le 2 est la puissance au carré) 
 		break;
 
 	case ABSCISSE:
-		printf("Entrez la valeur du cote oppose: ");
-		scanf("%lf", &(valeur->coteOppose));
+		printf("Entrez la valeur du cote oppose : ");
+		scanf_s("%lf", &(valeur->coteOppose));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->coteOppose <= 0)
 		{
 			printf("Veuillez rentrer une nouvelle valeur pour le cote oppose : ");
-			scanf("%lf", &(valeur->coteOppose));
+			scanf_s("%lf", &(valeur->coteOppose));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
-		printf("Entrez la valeur de l'hypotenuse: ");
-		scanf("%lf", &(valeur->hypotenuse));
+		printf("Entrez la valeur de l'hypotenuse : ");
+		scanf_s("%lf", &(valeur->hypotenuse));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->hypotenuse <= valeur->coteOppose)
 		{
 			printf("Veuillez rentrer une nouvelle valeur d'hypothenuse : ");
-			scanf("%lf", &(valeur->hypotenuse));
+			scanf_s("%lf", &(valeur->hypotenuse));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
 
-		valeur->abscisse = sqrt(pow(valeur->hypotenuse, 2) - pow(valeur->coteOppose, 2)); //le 2 est pour la puissance au carré 
+		valeur->abscisse = sqrt(pow(valeur->hypotenuse, 2) - pow(valeur->coteOppose, 2)); //Calcul pour trouver le côté opposé en utilisant le théorème de pythagore (le 2 est la puissance au carré)
 		break;
 
 	case OPPOSE:
 
-		printf("Entrez la valeur de l'abscisse: ");
-		scanf("%lf", &(valeur->abscisse));
+		printf("Entrez la valeur de l'abscisse : ");
+		scanf_s("%lf", &(valeur->abscisse));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->abscisse <= 0)
 		{
-			printf("Veuillez rentrer une nouvelle valeur pour l'abscisse ");
-			scanf("%lf", &(valeur->abscisse));
+			printf("Veuillez rentrer une nouvelle valeur pour l'abscisse : ");
+			scanf_s("%lf", &(valeur->abscisse));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
 		printf("Entrez la valeur de l'hypotenuse: ");
-		scanf("%lf", &(valeur->hypotenuse));
+		scanf_s("%lf", &(valeur->hypotenuse));
 		while ((getchar() != '\n') && (getchar() != EOF));
 
 		while (valeur->hypotenuse <= valeur->abscisse)
 		{
 			printf("Veuillez rentrer une nouvelle valeur d'hypothenuse : ");
-			scanf("%lf", &(valeur->hypotenuse));
+			scanf_s("%lf", &(valeur->hypotenuse));
 			while ((getchar() != '\n') && (getchar() != EOF));
 		}
 
-		valeur->coteOppose = sqrt(pow(valeur->hypotenuse, 2) - pow(valeur->abscisse, 2));
+		valeur->coteOppose = sqrt(pow(valeur->hypotenuse, 2) - pow(valeur->abscisse, 2));  //Calcul pour trouver le côté opposé en utilisant le théorème de pythagore (le 2 est la puissance au carré)
 		break;
 
 	default:
@@ -122,23 +120,26 @@ void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unit
 	}
 
 	// Calcul des valeurs trigonométriques
-	valeur->sinus = valeur->coteOppose / valeur->hypotenuse;
-	valeur->cosinus = valeur->abscisse / valeur->hypotenuse;
-	valeur->tangente = valeur->coteOppose / valeur->abscisse;
+	valeur->sinus = valeur->coteOppose / valeur->hypotenuse;		//Cacul pour le sinus
+	valeur->cosinus = valeur->abscisse / valeur->hypotenuse;		//Cacul pour le cosinus
+	valeur->tangente = valeur->coteOppose / valeur->abscisse;		//Cacul pour la tangente
 
 	switch (unite)
 	{
 	case DEGREE:
-		valeur->degree = (int)round(asin(valeur->sinus) * 180 / M_PI);
+		valeur->degree = (int)round(asin(valeur->sinus) * 180 / M_PI);  //Calcul pour convertir la valeur en radian en degré
 		break;
 
 	case RADIAN:
-		valeur->radian = asin(valeur->sinus);
+		valeur->radian = asin(valeur->sinus);	//Calcul pour les radians
+		break;
+	default:
 		break;
 	}
 
-	EcrireDateHeure(file);			//pour écrire l'heure exacte après que l'utilisateur ait rentré ses valeurs 
+	EcrireDateHeure(file);	//pour écrire l'heure exacte après que l'utilisateur ait rentré ses valeurs 
 
+	// Obligé de faire ce switch pour avoir les valeurs avant les printf, si je les mets dans l'autre switch, ça ne fonctionne plus
 	switch (choix)
 	{
 	case HYPOTHENUSE:
@@ -153,7 +154,6 @@ void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unit
 	default:
 		break;
 	}
-	fprintf(file, "%.2g, %.2g, %.2g, %.2g, %.2g, %.2g, ", valeur->abscisse, valeur->coteOppose, valeur->hypotenuse, valeur->cosinus, valeur->sinus, valeur->tangente);
 
 	// Affichage des résultats
 	printf("\nResultats:\n");
@@ -164,6 +164,9 @@ void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unit
 	printf("Sinus: %.2f\n", valeur->sinus);
 	printf("Tangente: %.2f\n", valeur->tangente);
 
+	//Ecrit dans le fichier les valeurs ci-dessus
+	fprintf(file, "%.2g, %.2g, %.2g, %.2g, %.2g, %.2g, ", valeur->abscisse, valeur->coteOppose, valeur->hypotenuse, valeur->cosinus, valeur->sinus, valeur->tangente);
+	
 	if (unite == DEGREE)
 	{
 		printf("Angle: %d degres\n\n\n", valeur->degree);

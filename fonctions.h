@@ -24,7 +24,7 @@ typedef struct
 
 void ConversionBinaire(FILE* file);
 void CalculTriangleRectangle(FILE* file, valeurTriangle* valeur, uniteAngle unite);
-void Ecriturelogs(FILE* file, int compteurConversionBinaire, int compteurTrigonometrie);
+void EcritureLogs(FILE* file, int compteurConversionBinaire, int compteurTrigonometrie);
 void EcrireDateHeure(FILE* file);
 
 #endif // !FONCTION_CONVERSION
